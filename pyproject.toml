@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "cft-test"
+version = "0.1.0"
+description = ""
+authors = ["pusha <ptyrtin@mail.ru>"]
+readme = "README.md"
+packages = [{include = "cft_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.96.0"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+pydantic = {extras = ["email"], version = "^1.10.9"}
+
+[tool.poetry.scripts]
+start = "cft_test.main:start"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
