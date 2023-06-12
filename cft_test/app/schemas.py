@@ -2,9 +2,23 @@ from typing import Union
 from pydantic import BaseModel, Field, EmailStr
 
 
-class User(BaseModel):
+class UserBase(BaseModel):
     username: str 
+
+
+class UserLogin(UserBase):
     password: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "username": "ProUser007",
+                "password": "Strong4Password!",
+            }
+        }
+
+
+class UserCreate(UserLogin):
     email: Union[EmailStr, None] = None
     full_name: Union[str, None] = None
 
@@ -19,14 +33,10 @@ class User(BaseModel):
         }
 
 
-class UserLogin(BaseModel):
-    username: str 
-    password: str
+class User(UserBase):
+    id: int
+    #salary
+    #dateIncrease
 
     class Config:
-        schema_extra = {
-            "example": {
-                "username": "ProUser007",
-                "password": "Strong4Password!",
-            }
-        }
+        orm_mode = True
