@@ -12,28 +12,10 @@ from .auth.auth_handler import authenticate_user, create_access_token, get_curre
 app = FastAPI()
 
 
-#Dependency
-# def get_db():
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
-
-
 @app.get("/", tags=["root"])
 def read_root():
     return {"Hello": "World"}
 
-
-# @app.get("/items/{item_id}")
-# def read_item(item_id: int, q: Union[str, None] = None):
-#     return {"item_id": item_id, "q": q}
-
-
-# @app.post("/user/signup", tags=["user"])
-# async def create_user(user: User = Body(...)):
-#     return {"message": "user signed up!"}
 
 @app.get("/users/", tags=["user"], response_model=list[schemas.User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):

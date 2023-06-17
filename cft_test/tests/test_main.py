@@ -27,7 +27,7 @@ def test_get_token():
     '''
     assert response.status_code == 200, "Wrong response"
     person_1.token = response.json()["access_token"]
-    print(person_1.token)
+    # print(person_1.token) # to see this use -rP after pytest
 
 
 def test_not_auth():
@@ -49,8 +49,9 @@ def test_bad_token():
 def test_salary_info():
     response = client.get("/users/salary", headers={"Authorization": f"Bearer {person_1.token}"})
     response_data = response.json()
-
-
+    '''
+    Get normal salary with normal token
+    '''
     assert response.status_code == 200, "Wrong response"
     assert response_data["salary"] == 40000, "Wrong salary"
     assert response_data["date_increase"] == "2023-12-12", "Wrong date increase"
