@@ -1,4 +1,4 @@
-# test_kamtor
+# test-SHIFT_CFT
 Test task for SHIFT CFT
 
 ## Task: 
