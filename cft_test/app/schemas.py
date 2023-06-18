@@ -50,8 +50,6 @@ class UserCreate(UserLogin):
 
 class User(UserBase):
     id: int
-    #salary
-    #dateIncrease
 
     class Config:
         orm_mode = True

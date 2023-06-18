@@ -23,6 +23,12 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return users
 
 
+@app.get("/users/salary", tags=["user"], response_model=schemas.Salary)
+def get_salary(current_user: Annotated[schemas.User, Depends(get_current_user)], db: Session = Depends(get_db)): # как передать сюда дб?
+    salary = crud.get_salary_for_user(current_user, db)
+    return salary
+
+
 @app.post("/users/signup", tags=["user"], response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db), salary: Optional[schemas.Salary]= None):
     db_user = crud.get_user_by_username(db, username=user.username)
@@ -42,9 +48,3 @@ def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depen
         )
     access_token = create_access_token(data={"sub": user.username})
     return {"access_token": access_token, "token_type": "bearer"}
-
-
-@app.get("/users/salary", tags=["user"], response_model=schemas.Salary)
-def get_salary(current_user: Annotated[schemas.User, Depends(get_current_user)], db: Session = Depends(get_db)): # как передать сюда дб?
-    salary = crud.get_salary_for_user(current_user, db)
-    return salary

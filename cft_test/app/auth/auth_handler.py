@@ -52,5 +52,3 @@ def get_current_user(token: Annotated[str, Depends(oauth2_scheme)], db: Session 
     if user is None:
         raise credentials_exeption
     return user
-
-
