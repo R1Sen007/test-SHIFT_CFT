@@ -28,12 +28,11 @@ Test task for SHIFT CFT
 ## How to install:
 ### 1) Clone repository
 ```
-git clone ------URL HERE--------
-cd test_kamtor
+git clone https://github.com/R1Sen007/test-SHIFT_CFT.git
 ```
 ### 2) Installation (need docker on your PC) 
 ```
-cd ----------repository root------
+cd test-SHIFT_CFT
 ```
 Image для тестов:
 ```
