@@ -9,43 +9,56 @@ Test task for SHIFT CFT
 потребуется реализовать метод где по логину и паролю сотрудника будет выдан
 секретный токен, который действует в течение определенного времени. Запрос
 данных о зарплате должен выдаваться только при предъявлении валидного токена.
-Требования к решению
-Обязательные технические требования:
-● код размещен и доступен в публичном репозитории на GitLab;
-● оформлена инструкция по запуску сервиса и взаимодействию с проектом
+
+### Требования к решению
+
+Обязательные технические требования:<br />
+● код размещен и доступен в публичном репозитории на GitLab;<br />
+● оформлена инструкция по запуску сервиса и взаимодействию с проекто<br />
 (Markdown файл с использованием конструкций разметки от GitLab по
-необходимости);
-● сервис реализован на FastAPI.
-Необязательные технические требования (по возрастанию трудоемкости):
-● зависимости зафиксированы менеджером зависимостей poetry;
-● написаны тесты с использованием pytest;
-● реализована возможность собирать и запускать контейнер с сервисом в Docker.
+необходимости);<br />
+● сервис реализован на FastAPI.<br />
+
+Необязательные технические требования (по возрастанию трудоемкости):<br />
+● зависимости зафиксированы менеджером зависимостей poetry;<br />
+● написаны тесты с использованием pytest;<br />
+● реализована возможность собирать и запускать контейнер с сервисом в Docker.<br />
 
 
 ## How to install:
 ### 1) Clone repository
 ```
-git clone https://github.com/R1Sen007/test_kamtor.git
+git clone ------URL HERE--------
 cd test_kamtor
 ```
-### 2) Create & activate virtual environment 
+### 2) Installation (need docker on your PC) 
 ```
-python -m venv venv
+cd ----------repository root------
 ```
-If your platform is Windows:
+Image для тестов:
 ```
-Set-ExecutionPolicy Unrestricted
-venv/Scripts/activate.ps1
+docker build -t cft-docker-tests --target test .
 ```
-If you have Unix/Linux:
+Image для старта сервера:
 ```
-sourse venv/bin/activate
-```
-### 3) Clone important libraries 
-```
-pip install -r requirements.txt
+docker build -t cft-docker --target production . 
 ```
 ## How to run:
+### Для старта сервера:
+Запускаем контейнер:
 ```
-python main.py
+docker run -d --name cft-dockercontainer -p 8000:8000 cft-docker
+```
+Переходим в браузер и набираем:
+```
+http://0.0.0.0:8000/docs
+```
+### Для прохода тестов:
+Запускаем контейнер:
+```
+docker run -d --name cft-dockercontainer-tests cft-docker-tests
+```
+Смотрим логи:
+```
+docker logs cft-dockercontainer-tests
 ```
