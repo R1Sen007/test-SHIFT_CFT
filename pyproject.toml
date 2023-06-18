@@ -21,7 +21,7 @@ python-multipart = "^0.0.6"
 
 [tool.pytest.ini_options]
 pythonpath = [
-  "."
+  "cft_test"
 ]
 
 
